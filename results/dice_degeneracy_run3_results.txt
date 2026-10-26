@@ -1,0 +1,35 @@
+================================================================
+dice_degeneracy_run3  —  linear probe (7-class HAM10000)
+================================================================
+Model: frozen-feature linear probe  |  feat_dim=384  |  ckpt=outputs\dice_degeneracy_2x2\run3\best_dino_head.pth  (val_macro_f1=0.5563)
+Regenerated from saved checkpoint (no retraining).
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     33       4       8       4       3       0       0
+     bcc      8      57       2       1       2       1       0
+     bkl     21      16      97       1      16      16       0
+      df      3       0       2      14       0       1       0
+     mel      7       4      34       3      93      25       1
+      nv      7      30      77       4     137     742       7
+    vasc      0       2       0       0       2       0      17
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.42      0.63      0.50        52
+         bcc       0.50      0.80      0.62        71
+         bkl       0.44      0.58      0.50       167
+          df       0.52      0.70      0.60        20
+         mel       0.37      0.56      0.44       167
+          nv       0.95      0.74      0.83      1004
+        vasc       0.68      0.81      0.74        21
+
+    accuracy                           0.70      1502
+   macro avg       0.55      0.69      0.60      1502
+weighted avg       0.78      0.70      0.72      1502
+
+========================================
+  Macro-F1        : 0.6046
+  Melanoma Recall : 0.5569
+========================================

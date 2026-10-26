@@ -1,0 +1,35 @@
+================================================================
+probe_loss_dinov3_focal  —  linear probe (7-class HAM10000)
+================================================================
+Model: frozen-feature linear probe  |  feat_dim=384  |  ckpt=outputs\probe_loss_ablation\dinov3_focal\best_dino_head.pth  (val_macro_f1=0.3913)
+Regenerated from saved checkpoint (no retraining).
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     39       4       2       7       0       0       0
+     bcc     12      52       0       5       2       0       0
+     bkl     32      23      73       7      28       1       3
+      df      2       0       0      18       0       0       0
+     mel     23      10      10      16      98       8       2
+      nv     26      32      79      70     267     492      38
+    vasc      0       0       1       0       1       0      19
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.29      0.75      0.42        52
+         bcc       0.43      0.73      0.54        71
+         bkl       0.44      0.44      0.44       167
+          df       0.15      0.90      0.25        20
+         mel       0.25      0.59      0.35       167
+          nv       0.98      0.49      0.65      1004
+        vasc       0.31      0.90      0.46        21
+
+    accuracy                           0.53      1502
+   macro avg       0.41      0.69      0.44      1502
+weighted avg       0.77      0.53      0.57      1502
+
+========================================
+  Macro-F1        : 0.4446
+  Melanoma Recall : 0.5868
+========================================

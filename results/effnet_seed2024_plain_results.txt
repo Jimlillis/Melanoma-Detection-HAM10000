@@ -1,0 +1,35 @@
+================================================================
+effnet_seed2024_plain  —  EfficientNet-B0 (7-class HAM10000)
+================================================================
+Model: EfficientNet-B0 (7-class)  |  eval=plain single forward pass (no TTA / no MC Dropout)  |  ckpt=outputs\effnet_seed_variance\seed2024\best_efficientnet.pth
+Regenerated from saved checkpoint (no retraining).
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     38       3      11       0       0       0       0
+     bcc      5      58       3       0       1       2       2
+     bkl     12       6     107       0      25      17       0
+      df      3       0       4      10       2       1       0
+     mel      4       3      15       2     107      36       0
+      nv      7      11      44       0      96     844       2
+    vasc      0       1       0       1       4       2      13
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.55      0.73      0.63        52
+         bcc       0.71      0.82      0.76        71
+         bkl       0.58      0.64      0.61       167
+          df       0.77      0.50      0.61        20
+         mel       0.46      0.64      0.53       167
+          nv       0.94      0.84      0.89      1004
+        vasc       0.76      0.62      0.68        21
+
+    accuracy                           0.78      1502
+   macro avg       0.68      0.68      0.67      1502
+weighted avg       0.81      0.78      0.79      1502
+
+========================================
+  Macro-F1        : 0.6720
+  Melanoma Recall : 0.6407
+========================================

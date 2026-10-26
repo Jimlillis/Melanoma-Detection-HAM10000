@@ -1,0 +1,35 @@
+================================================================
+effnet_loss_dice_plain  —  EfficientNet-B0 (7-class HAM10000)
+================================================================
+Model: EfficientNet-B0 (7-class)  |  eval=plain single forward pass (no TTA / no MC Dropout)  |  ckpt=outputs\effnet_loss_ablation\dice\best_efficientnet.pth
+Regenerated from saved checkpoint (no retraining).
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     40       2       7       1       1       1       0
+     bcc      6      57       3       1       2       2       0
+     bkl     16       3      85       0      40      23       0
+      df      2       0       0      15       2       1       0
+     mel      5       4       5       1     121      31       0
+      nv      2      16      38       1     104     840       3
+    vasc      0       0       1       0       5       0      15
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.56      0.77      0.65        52
+         bcc       0.70      0.80      0.75        71
+         bkl       0.61      0.51      0.56       167
+          df       0.79      0.75      0.77        20
+         mel       0.44      0.72      0.55       167
+          nv       0.94      0.84      0.88      1004
+        vasc       0.83      0.71      0.77        21
+
+    accuracy                           0.78      1502
+   macro avg       0.70      0.73      0.70      1502
+weighted avg       0.82      0.78      0.79      1502
+
+========================================
+  Macro-F1        : 0.7029
+  Melanoma Recall : 0.7246
+========================================

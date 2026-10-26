@@ -1,0 +1,35 @@
+================================================================
+probe_loss_dinov2_dice  —  linear probe (7-class HAM10000)
+================================================================
+Model: frozen-feature linear probe  |  feat_dim=384  |  ckpt=outputs\probe_loss_ablation\dinov2_dice\best_dino_head.pth  (val_macro_f1=0.3384)
+Regenerated from saved checkpoint (no retraining).
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     35       3       0       2      12       0       0
+     bcc      5      57       0       1       8       0       0
+     bkl     27      12       0       1     127       0       0
+      df      3       0       0      16       1       0       0
+     mel      7       3       0       2     154       0       1
+      nv      4      22       0       2     974       0       2
+    vasc      0       0       0       0       8       0      13
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.43      0.67      0.53        52
+         bcc       0.59      0.80      0.68        71
+         bkl       0.00      0.00      0.00       167
+          df       0.67      0.80      0.73        20
+         mel       0.12      0.92      0.21       167
+          nv       0.00      0.00      0.00      1004
+        vasc       0.81      0.62      0.70        21
+
+    accuracy                           0.18      1502
+   macro avg       0.37      0.55      0.41      1502
+weighted avg       0.08      0.18      0.09      1502
+
+========================================
+  Macro-F1        : 0.4067
+  Melanoma Recall : 0.9222
+========================================

@@ -1,0 +1,35 @@
+================================================================
+effnet_loss_focal_tta_mc  —  EfficientNet-B0 (7-class HAM10000)
+================================================================
+Model: EfficientNet-B0 (7-class)  |  eval=5-view TTA + MC Dropout (10 passes/view)  |  ckpt=outputs\effnet_loss_ablation\focal\best_efficientnet.pth
+Regenerated from saved checkpoint (no retraining).
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     39       3       8       0       2       0       0
+     bcc      3      58       4       0       3       3       0
+     bkl     10      10     107       1      20      19       0
+      df      3       0       1      11       4       1       0
+     mel      6       1       9       2     124      25       0
+      nv      7      16      45       2     130     802       2
+    vasc      0       0       1       0       3       2      15
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.57      0.75      0.65        52
+         bcc       0.66      0.82      0.73        71
+         bkl       0.61      0.64      0.63       167
+          df       0.69      0.55      0.61        20
+         mel       0.43      0.74      0.55       167
+          nv       0.94      0.80      0.86      1004
+        vasc       0.88      0.71      0.79        21
+
+    accuracy                           0.77      1502
+   macro avg       0.68      0.72      0.69      1502
+weighted avg       0.82      0.77      0.78      1502
+
+========================================
+  Macro-F1        : 0.6882
+  Melanoma Recall : 0.7425
+========================================

@@ -1,0 +1,56 @@
+STRATEGY A — FEATURE CONCATENATION ENSEMBLE
+EfficientNet-B0 (1280-dim) + DINOv2 ViT-S/14 (384-dim) → 1664-dim MLP
+
+Configuration
+  MLP      : Linear(1664→512)→BN→GELU→Dropout(0.3)
+             → Linear(512→256)→BN→GELU→Dropout(0.3) → Linear(256→7)
+  Loss     : Focal (gamma=2.0) + inverse-frequency class weights
+  Optimiser: AdamW (lr=0.001, weight_decay=0.0001)
+  Scheduler: CosineAnnealingLR (T_max=50)
+  Epochs   : 50   Batch size: 128   Seed: 42
+  Best val Macro-F1: 0.7429  (epoch 45)
+  Checkpoint: outputs\ensemble_concat\best_concat_head.pth
+
+Confusion Matrix  (rows = true, cols = predicted):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     35       3      11       0       1       2       0
+     bcc      2      53       6       0       2       8       0
+     bkl      8       7     100       0      12      40       0
+      df      0       0       2      15       1       2       0
+     mel      6       1       4       1      96      59       0
+      nv      2       6      25       1      39     928       3
+    vasc      0       0       1       0       3       4      13
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.66      0.67      0.67        52
+         bcc       0.76      0.75      0.75        71
+         bkl       0.67      0.60      0.63       167
+          df       0.88      0.75      0.81        20
+         mel       0.62      0.57      0.60       167
+          nv       0.89      0.92      0.91      1004
+        vasc       0.81      0.62      0.70        21
+
+    accuracy                           0.83      1502
+   macro avg       0.76      0.70      0.72      1502
+weighted avg       0.82      0.83      0.82      1502
+
+====================================================================
+  Macro-F1        : 0.7242
+  Melanoma Recall : 0.5749
+====================================================================
+
+==============================================================
+ENSEMBLE COMPARISON — HAM10000 Test Set
+--------------------------------------------------------------
+Model                                    Macro-F1  MEL Recall
+--------------------------------------------------------------
+EfficientNet (alone)                        0.692       0.713
+DINOv2 (alone)                              0.545       0.689
+Soft Ensemble B (0.50/0.50)                 0.696       0.731
+Weighted Ensemble C (0.60/0.40)             0.696       0.719
+Feature Concat A (1664-dim MLP)             0.724       0.575
+--------------------------------------------------------------
+Last row: Feature Concat A (this script)
+==============================================================

@@ -1,0 +1,85 @@
+BiomedCLIP Zero-Shot Classification — HAM10000 (7-class)
+=========================================================
+Model  : hf-hub:microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224
+Split  : test set, lesion-level stratified split (seed=42)
+Images : 1502
+Classes: ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+Prompts: 5 per class
+
+Reference (BiomedCLIP linear probe, same test split):
+  Macro-F1   = 0.420
+  MEL Recall = 0.509
+
+======================================================================
+  Strategy: Averaged Prompts (per-class mean embedding)
+======================================================================
+
+Confusion Matrix (rows = true class, cols = predicted class):
+   akiec    bcc    bkl     df    mel     nv   vasc
+ akiec      20      2      0      0      5     18      7
+   bcc      14      8      0      0     11     24     14
+   bkl      21      3      1      0     30    103      9
+    df       8      1      0      0      0      9      2
+   mel      13      0      0      0     67     80      7
+    nv      12      2      3      1    211    517    258
+  vasc       0      1      0      0      5      3     12
+
+Per-class metrics:
+              precision    recall  f1-score   support
+
+       akiec       0.23      0.38      0.29        52
+         bcc       0.47      0.11      0.18        71
+         bkl       0.25      0.01      0.01       167
+          df       0.00      0.00      0.00        20
+         mel       0.20      0.40      0.27       167
+          nv       0.69      0.51      0.59      1004
+        vasc       0.04      0.57      0.07        21
+
+    accuracy                           0.42      1502
+   macro avg       0.27      0.28      0.20      1502
+weighted avg       0.54      0.42      0.44      1502
+
+  Macro-F1      : 0.2015
+  MEL Recall    : 0.4012
+
+Comparison with BiomedCLIP linear probe:
+  Linear probe  Macro-F1 = 0.420   MEL Recall = 0.509
+  Zero-shot     Macro-F1 = 0.201   MEL Recall = 0.401
+  Delta         Macro-F1 = -0.219   MEL Recall = -0.108
+
+======================================================================
+  Strategy: Max-Sim Ensemble (per-prompt max similarity)
+======================================================================
+
+Confusion Matrix (rows = true class, cols = predicted class):
+   akiec    bcc    bkl     df    mel     nv   vasc
+ akiec      12     16      0     12      5      4      3
+   bcc      13     19      3     16      6      1     13
+   bkl      19     21      7     67     34     17      2
+    df       4      2      0     13      0      1      0
+   mel      18     28      2     30     74      9      6
+    nv      31     27      6    553    202    105     80
+  vasc       0      1      1      6      4      0      9
+
+Per-class metrics:
+              precision    recall  f1-score   support
+
+       akiec       0.12      0.23      0.16        52
+         bcc       0.17      0.27      0.21        71
+         bkl       0.37      0.04      0.08       167
+          df       0.02      0.65      0.04        20
+         mel       0.23      0.44      0.30       167
+          nv       0.77      0.10      0.18      1004
+        vasc       0.08      0.43      0.13        21
+
+    accuracy                           0.16      1502
+   macro avg       0.25      0.31      0.16      1502
+weighted avg       0.59      0.16      0.18      1502
+
+  Macro-F1      : 0.1567
+  MEL Recall    : 0.4431
+
+Comparison with BiomedCLIP linear probe:
+  Linear probe  Macro-F1 = 0.420   MEL Recall = 0.509
+  Zero-shot     Macro-F1 = 0.157   MEL Recall = 0.443
+  Delta         Macro-F1 = -0.263   MEL Recall = -0.066

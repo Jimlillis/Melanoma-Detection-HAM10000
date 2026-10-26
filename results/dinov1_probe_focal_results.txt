@@ -1,0 +1,35 @@
+================================================================
+dinov1_probe_focal  —  linear probe (7-class HAM10000)
+================================================================
+Model: frozen-feature linear probe  |  feat_dim=384  |  ckpt=outputs/dino_linear/best_dino_head.pth  (val_macro_f1=0.5268)
+Regenerated from saved checkpoint (no retraining).
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     36       5       8       2       1       0       0
+     bcc      9      47       6       2       5       0       2
+     bkl     20      13      95       2      27       9       1
+      df      4       0       3      12       1       0       0
+     mel     16       4      16       8     104      19       0
+      nv     16      30      77      23     183     662      13
+    vasc      0       1       0       1       2       1      16
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.36      0.69      0.47        52
+         bcc       0.47      0.66      0.55        71
+         bkl       0.46      0.57      0.51       167
+          df       0.24      0.60      0.34        20
+         mel       0.32      0.62      0.42       167
+          nv       0.96      0.66      0.78      1004
+        vasc       0.50      0.76      0.60        21
+
+    accuracy                           0.65      1502
+   macro avg       0.47      0.65      0.53      1502
+weighted avg       0.77      0.65      0.68      1502
+
+========================================
+  Macro-F1        : 0.5262
+  Melanoma Recall : 0.6228
+========================================

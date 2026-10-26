@@ -1,0 +1,47 @@
+================================================================
+DINOv2 ViT-S/14 — FULL FINE-TUNE (7-class HAM10000)  [melanoma-aware selection]
+================================================================
+Backbone            : dinov2_vits14 (all params trainable)
+Image size          : 224
+Loss                : combined (0.5*Focal[gamma=2.0] + 0.5*Dice), inverse-freq weights
+Backbone LR / Head LR / layer-decay : 1e-05 / 0.001 / 0.75
+Weight decay        : 0.05  |  warmup ep: 3  |  patience: 10
+Checkpoint criterion: composite  (0.5*Macro-F1 + 0.5*MEL_Recall)
+Best epoch          : 18  (val Macro-F1 = 0.7166, val MEL Recall = 0.7283)
+
+Confusion Matrix  (rows = true class, cols = predicted class):
+          akiec     bcc     bkl      df     mel      nv    vasc
+   akiec     30       4       8       1       6       3       0
+     bcc      4      62       1       0       1       2       1
+     bkl      7       5      90       0      29      36       0
+      df      3       0       0      13       0       4       0
+     mel      6       3       4       1     102      50       1
+      nv      2       5      11       0      65     918       3
+    vasc      0       0       0       0       2       2      17
+
+Per-class Classification Report:
+              precision    recall  f1-score   support
+
+       akiec       0.58      0.58      0.58        52
+         bcc       0.78      0.87      0.83        71
+         bkl       0.79      0.54      0.64       167
+          df       0.87      0.65      0.74        20
+         mel       0.50      0.61      0.55       167
+          nv       0.90      0.91      0.91      1004
+        vasc       0.77      0.81      0.79        21
+
+    accuracy                           0.82      1502
+   macro avg       0.74      0.71      0.72      1502
+weighted avg       0.83      0.82      0.82      1502
+
+=====================================================================
+  Model Comparison
+=====================================================================
+Model                                         | Macro-F1 | MEL Rec
+---------------------------------------------------------------------
+EfficientNet (full fine-tune)                 |    0.692 |   0.713
+DINOv2 (linear probe, frozen)                 |    0.545 |   0.689
+DINOv2 (full fine-tune, best-F1 ckpt)         |    0.744 |   0.569
+DINOv2 (full fine-tune, best-F1, threshold)   |    0.732 |   0.641
+DINOv2 (full fine-tune, melanoma-aware) [NEW] |    0.719 |   0.611
+=====================================================================

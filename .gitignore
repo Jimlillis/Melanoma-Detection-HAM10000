@@ -1,0 +1,13 @@
+data/
+outputs/
+models/
+notebooks/
+app/
+*.pth
+*.pt
+*.npz
+__pycache__/
+*.pyc
+~$*
+.env
+.ipynb_checkpoints/

@@ -1,0 +1,84 @@
+BiomedCLIP Zero-Shot Classification — Phase 3 (Gemini-derived prompts)
+=======================================================================
+Model  : hf-hub:microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224
+Split  : test set, lesion-level stratified split (seed=42)
+Images : 1502
+Classes: ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+Prompts: 5 per class (Gemini-derived dermoscopic descriptions)
+
+======================================================================
+  Strategy: Phase 3 Averaged Prompts (per-class mean embedding) — Gemini prompts
+======================================================================
+
+Confusion Matrix (rows = true, cols = predicted):
+   akiec    bcc    bkl     df    mel     nv   vasc
+ akiec       2     26      2      0      7     15      0
+   bcc       1     48      6      7      6      3      0
+   bkl       2     37     19     13     44     52      0
+    df       0     15      0      3      0      2      0
+   mel       1     43      4      6     80     33      0
+    nv      11     92     13    235    307    342      4
+  vasc       0      4      1     12      3      0      1
+
+Per-class metrics:
+              precision    recall  f1-score   support
+
+       akiec       0.12      0.04      0.06        52
+         bcc       0.18      0.68      0.29        71
+         bkl       0.42      0.11      0.18       167
+          df       0.01      0.15      0.02        20
+         mel       0.18      0.48      0.26       167
+          nv       0.77      0.34      0.47      1004
+        vasc       0.20      0.05      0.08        21
+
+    accuracy                           0.33      1502
+   macro avg       0.27      0.26      0.19      1502
+weighted avg       0.59      0.33      0.38      1502
+
+  Macro-F1   : 0.1932
+  MEL Recall : 0.4790
+
+======================================================================
+  Strategy: Phase 3 Max-Sim Ensemble (per-prompt max similarity) — Gemini prompts
+======================================================================
+
+Confusion Matrix (rows = true, cols = predicted):
+   akiec    bcc    bkl     df    mel     nv   vasc
+ akiec      14     12      1      0      7     18      0
+   bcc      24     13      3      6      3     20      2
+   bkl      20     15      7      5      4    116      0
+    df       6      3      0      5      0      5      1
+   mel       6     13      2      3      8    134      1
+    nv      26     19      4     36     40    874      5
+  vasc       0      4      1     11      2      1      2
+
+Per-class metrics:
+              precision    recall  f1-score   support
+
+       akiec       0.15      0.27      0.19        52
+         bcc       0.16      0.18      0.17        71
+         bkl       0.39      0.04      0.08       167
+          df       0.08      0.25      0.12        20
+         mel       0.12      0.05      0.07       167
+          nv       0.75      0.87      0.80      1004
+        vasc       0.18      0.10      0.12        21
+
+    accuracy                           0.61      1502
+   macro avg       0.26      0.25      0.22      1502
+weighted avg       0.57      0.61      0.57      1502
+
+  Macro-F1   : 0.2219
+  MEL Recall : 0.0479
+
+======================================================
+  Zero-Shot Results — All Phases
+======================================================
+Strategy               |  Macro-F1 | MEL Recall
+------------------------------------------------------
+Phase1 Averaged        |     0.201 |      0.401
+Phase1 Max-Sim         |     0.157 |      0.443
+Phase2 Averaged        |     0.151 |      0.108
+Phase2 Max-Sim         |     0.142 |      0.012
+Phase3 Averaged        |     0.193 |      0.479
+Phase3 Max-Sim         |     0.222 |      0.048
+======================================================

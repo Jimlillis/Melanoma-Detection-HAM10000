@@ -1,0 +1,90 @@
+BiomedCLIP Zero-Shot Classification — Phase 2 (Clinically-Informed Prompts)
+============================================================================
+Model  : hf-hub:microsoft/BiomedCLIP-PubMedBERT_256-vit_base_patch16_224
+Split  : test set, lesion-level stratified split (seed=42)
+Images : 1502
+Classes: ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+Prompts: 5 per class (dermoscopic descriptions via MedGPT)
+
+Phase 1 reference (generic prompts):
+  Averaged  Macro-F1=0.201  MEL Recall=0.401
+  Max-Sim   Macro-F1=0.157  MEL Recall=0.443
+
+======================================================================
+  Strategy: Phase 2 Averaged Prompts (per-class mean embedding)
+======================================================================
+
+Confusion Matrix (rows = true class, cols = predicted class):
+   akiec    bcc    bkl     df    mel     nv   vasc
+ akiec       3     28      4     13      1      1      2
+   bcc       1     27      1     29      1      0     12
+   bkl       3     51     19     56     12     21      5
+    df       0      3      0     15      0      0      2
+   mel       0     85      6     33     18     18      7
+    nv       6     87     15    563     74    164     95
+  vasc       0      4      0      1      1      0     15
+
+Per-class metrics:
+              precision    recall  f1-score   support
+
+       akiec       0.23      0.06      0.09        52
+         bcc       0.09      0.38      0.15        71
+         bkl       0.42      0.11      0.18       167
+          df       0.02      0.75      0.04        20
+         mel       0.17      0.11      0.13       167
+          nv       0.80      0.16      0.27      1004
+        vasc       0.11      0.71      0.19        21
+
+    accuracy                           0.17      1502
+   macro avg       0.26      0.33      0.15      1502
+weighted avg       0.62      0.17      0.23      1502
+
+  Macro-F1   : 0.1508
+  MEL Recall : 0.1078
+
+======================================================================
+  Strategy: Phase 2 Max-Sim Ensemble (per-prompt max similarity)
+======================================================================
+
+Confusion Matrix (rows = true class, cols = predicted class):
+   akiec    bcc    bkl     df    mel     nv   vasc
+ akiec       5     32      1     13      0      0      1
+   bcc       2     34      4     22      0      0      9
+   bkl       5     89     20     41      1      8      3
+    df       0      4      0     11      0      0      5
+   mel       1    106      5     23      2     23      7
+    nv      15    269     29    433     21    172     65
+  vasc       0      0      0      2      4      0     15
+
+Per-class metrics:
+              precision    recall  f1-score   support
+
+       akiec       0.18      0.10      0.12        52
+         bcc       0.06      0.48      0.11        71
+         bkl       0.34      0.12      0.18       167
+          df       0.02      0.55      0.04        20
+         mel       0.07      0.01      0.02       167
+          nv       0.85      0.17      0.29      1004
+        vasc       0.14      0.71      0.24        21
+
+    accuracy                           0.17      1502
+   macro avg       0.24      0.31      0.14      1502
+weighted avg       0.62      0.17      0.23      1502
+
+  Macro-F1   : 0.1424
+  MEL Recall : 0.0120
+
+====================================================
+  Phase 1 vs Phase 2 — Side-by-Side Comparison
+====================================================
+Strategy               |  Macro-F1 | MEL Recall
+----------------------------------------------------
+Phase1 Averaged        |     0.201 |      0.401
+Phase1 Max-Sim         |     0.157 |      0.443
+----------------------------------------------------
+Phase2 Averaged        |     0.151 |      0.108
+Phase2 Max-Sim         |     0.142 |      0.012
+----------------------------------------------------
+Delta Averaged         |    -0.050 |     -0.293
+Delta Max-Sim          |    -0.015 |     -0.431
+====================================================
