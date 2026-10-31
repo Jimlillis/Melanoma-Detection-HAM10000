@@ -2,7 +2,7 @@
 
 Code and results of my diploma thesis *Algorithms for Melanoma Recognition from Skin Images*
 (Department of Electrical and Computer Engineering, Democritus University of Thrace, 2026;
-supervisor: Assoc. Prof. Nikolaos Mitianoudis).
+supervisor: Prof. Nikolaos Mitianoudis).
 
 The task is 7-class classification of dermoscopic images (akiec, bcc, bkl, df, mel, nv, vasc).
 The goal is a high melanoma recall (MEL Recall) without a drop in macro-F1.
